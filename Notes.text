@@ -63,3 +63,41 @@ It is a better way of writing try-catch block.
 >It's a better and modular way to write code.
 
 <------------Custom ExpressError--------->
+I made a ExpressError class in  ExpressError.js inside utils folder to make Custom ExpressError.
+
+// 404 Handler for Unmatched Routes
+app.use((req, res, next) => {
+    next(new ExpressError(404, "Page Not Found"));
+});
+
+<------------Error.ejs--------->
+I made a error.ejs inside the views/listings/error.ejs to show error in a good manner to the user.
+>Here i have used bootstrap alerts.
+
+<%layout("/layouts/boilerplate")%>
+<div class="row mt-3">
+    <div class="alert alert-danger col-6 offset-3" role="alert">
+       <h4 class="alert-heading"><%=message%></h4>
+    </div>
+</div>
+
+
+<------------Validations for Schema--------->
+>Here i have used joi schema validation library for checking that each field 
+ of form to create a new listing is filled by user or not.
+
+>joi is an npm package.
+
+>>Middlware:-
+
+//A custom Express middleware function 
+const validateListing = (req, res, next) => {
+    let { error } = listingSchema.validate(req.body);
+    if (error) {
+        let errMsg = error.details.map((el) => el.message).join(",");
+        throw new ExpressError(400, errMsg);
+    }
+    else {
+        next();
+    }
+}
