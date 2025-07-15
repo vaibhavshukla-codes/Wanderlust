@@ -32,9 +32,34 @@ Note: Methods used in WanderLust:-
 
 #----------------------------------Phase 1(part c)-----------------------------------#
 <------------Form Validdations----->
+#Frontend Validation:
+
+Note: Bootrap form validation is a stadaradized form validation so it works same for all browsers.
 It is of two types:-
 1: Client side validation (frontend to backend)
 3: Server side validation (db schema/ error handle)
 
 >when we enter the data in the form, the browser and/or web server will check to see that the data is in the correct
  format and within the constriants set by the application.
+
+>IN project Bootrap validation is used with it's js to manage it's class( class="needs-validation") in form of new.ejs.
+>novalidate:In Bootstrap, the novalidate attribute is used in HTML forms to disable the browser’s built-in form validation,
+
+---->Success and Failure Text: 
+>valid-feedback and invalid-feedback bootrap classes are used.
+
+#Backend Validation:
+
+<------------Custom Error Handler----->
+I used app.use() to handle the error if any value type entered by user not matched to the database schema.
+app.use((err, req, res, next) => {
+    res.send("somthing went wrong!");
+});
+
+
+<------------Custom WrapAsync--------->
+It is a better way of writing try-catch block.
+>Created a folder utils and a file inside it named wrapAsync.js to handle error.
+>It's a better and modular way to write code.
+
+<------------Custom ExpressError--------->
