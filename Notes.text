@@ -1,0 +1,40 @@
+Note: Methods used in WanderLust:-
+
+1: toLocaleString()
+
+-------------------------------------------------------------------------------------------------------------------------
+#------------------------------Phase 1(part a)----------------------#
+#Getting Started:-
+1: Database Set UP
+2: REST Apis for CRUD
+
+#Model: Listing
+1:title
+2:description
+3:image
+4:price
+5:location
+6:country
+
+#Index Route 
+#Read: Show Rout
+#Create: New & Create Route
+#Update: Edit & Update Route
+#Delete: Delete Route
+
+#------------------------------Phase 1(part b)----------------------#
+#What is EJS Mate.(search npm ejs mate).
+#Creating NavBar.
+
+#Styling Index
+1rem = 16px
+
+
+#----------------------------------Phase 1(part c)-----------------------------------#
+<------------Form Validdations----->
+It is of two types:-
+1: Client side validation (frontend to backend)
+3: Server side validation (db schema/ error handle)
+
+>when we enter the data in the form, the browser and/or web server will check to see that the data is in the correct
+ format and within the constriants set by the application.
