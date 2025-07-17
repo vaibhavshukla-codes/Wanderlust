@@ -101,3 +101,41 @@ const validateListing = (req, res, next) => {
         next();
     }
 }
+
+-------------------------------------------------------------------------------------------------------------------------
+
+#--------------------------------------------Phase 2(part a)-------------------------------------------#
+<----------Handling Deletion----------->
+Using Mongoose Middlware
+
+>We can use 2 middlewares:
+pre-run before the query is executed.
+post-run after the query is executed.
+
+>findByIdAndDelete() triggers findOneAndDelete() middleware .
+>for findOneAndDelete() middleware we make a Mongoose Middlware to be triggerd by it.
+>Mongoose Middlware can be a pre or post middleware.
+>pre works before deletion.
+>post works after deletion.
+
+
+#Pre and Post Middleware:-
+✅ Pre and Post Middleware schema banane ke baad aur model banane se pehle likhna chahiye.
+
+| Middleware | Kab chalta hai         | Kab use karein                                |
+| ---------- | ---------------------- | --------------------------------------------- |
+| `pre`      | Operation ke **pehle** | Data validate, modify ya log karna ho         |
+| `post`     | Operation ke **baad**  | Cleanup, log, ya related data delete karna ho |
+
+
+> Here one listing can be related to multiple reviews ( 1 to n relation).
+
+
+<----------New Model: Reviews----------->
+1: comment   -> String
+2: rating    -> Number
+3: createdAt -> Date, Time
+
+
+<----------Create Reviews----------->
+1: Setting up the Reviews Form
