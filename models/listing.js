@@ -26,6 +26,12 @@ const listingSchema = new Schema({
      ] 
 });
 
-const Listing = new mongoose.model("Listing",listingSchema);
+// Deletes all associated reviews when a listing is deleted
+listingSchema.post("findOneAndDelete", async (listing) => {
+   if (listing) {
+      await Review.deleteMany({ _id: { $in: listing.reviews}});
+   }
+});
 
+const Listing = new mongoose.model("Listing",listingSchema);
 module.exports = Listing

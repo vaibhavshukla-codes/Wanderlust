@@ -139,3 +139,25 @@ post-run after the query is executed.
 
 <----------Create Reviews----------->
 1: Setting up the Reviews Form
+2: Submitting the form
+  POST /listings/:id/reviews
+
+<----------Validations for Reviews----------->
+1: Client side validation (in form)(using bootstrap form validation by adding it's js (js/script.js)).
+2: Server side validation (using joi)(using joi schema validation library).
+
+>Bootstrap provides built-in support for client-side form validation.
+
+<----------Render Reviews----------->
+I will display client reviews on show listing page.(show.ejs).
+
+<----------Adding Style----------->
+We will show our reviews in bootstrap cards.
+
+<----------Deleting Reviews----------->
+Mongo $pull operator.
+>$pull:-
+the $pull operator removes from an existing array all instances of a value or values that match a specified condition.
+
+<----------Deleting Listing----------->
+Delete Middleware for reviews
