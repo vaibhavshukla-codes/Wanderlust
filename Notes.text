@@ -240,3 +240,4 @@ app.get("/verify",(req,res)=>{
 
 >express divides signed and unsigned cookies into two categories.
 >req.cookies gives unsigned  cookies only.
+>secretcode can be any string
