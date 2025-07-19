@@ -161,3 +161,82 @@ the $pull operator removes from an existing array all instances of a value or va
 
 <----------Deleting Listing----------->
 Delete Middleware for reviews
+
+
+#--------------------------------------------Phase 2(part b)-------------------------------------------#
+Topics to Cover:-
+1: Express Router
+2: Cookies
+
+1:Express Router:
+Express Router are the way to orgniaze you Express Application such that your primary app.js file does not 
+become bloated.
+
+const router = express.Router(); // creates new router object.
+
+>we use express router to make our app.js file clean and blaoting free that's why we make  
+separated files for related routes at single place.
+
+
+<--------------Restructuring Listings-------------->
+app.use("/listings",listings);
+
+<--------------Restructuring Reviews-------------->
+app.use("/listings/:id/reviews",reviews);
+router = express.Router({mergeParams:true});
+
+
+<---------------------------------------Cookies------------------------------------------------>
+#Web Cookies:-
+>HTTP cookies are small blocks of data created by a web server while a user is browsing a website 
+ and placed on the user's computer or other device by the user's web browser.
+
+#How to send Cookies:-
+>in Express
+
+app.get("/setCookies",(req,res)=>{
+    res.cookie("greet","namaste");
+    res.cookie("origin","india");
+    res.send("We sent you a cookie");
+});
+
+note: Cookies are always stored as key-value pairs.
+
+
+<--------------------------Cookie Parser------------------------------->
+>cookie-parser package.
+(it is an npm package and installed through npm)
+>npm i cookie-parser.
+>cookies are stored in req object.
+>we get cookies from req.cookies.
+
+const cookieParser = require("cookie-parser");
+app.use(cookieParser());
+
+app.get("/getCookies",(req,res)=>{
+   console.dir(req.cookies);
+   res.send("got cookies");
+});
+
+app.get("/getCookies",(req,res)=>{
+    let {name = "anonymous"} = req.cookies;
+    res.send(`Hi, ${name}`);
+});
+
+<--------------------------Signed Cookies------------------------------->
+>Send Signed Cookie.
+
+app.use(cookieParser("secretcode"));
+app.get("getsignedcookie",(req,res)=>{
+ res.cookie("color","red",{signed:true});
+ res.send("Done!");
+});
+
+>Verify Signed Cookie.
+
+app.get("/verify",(req,res)=>{
+    res.send(req.singedCookies);
+});
+
+>express divides signed and unsigned cookies into two categories.
+>req.cookies gives unsigned  cookies only.
