@@ -225,6 +225,7 @@ app.get("/getCookies",(req,res)=>{
 
 <--------------------------Signed Cookies------------------------------->
 >Send Signed Cookie.
+>Iska purpose hota hai ye ensure karna ki cookie ka data tamper (badla) nahi kiya gaya hai client side pe.
 
 app.use(cookieParser("secretcode"));
 app.get("getsignedcookie",(req,res)=>{
@@ -242,3 +243,121 @@ app.get("/verify",(req,res)=>{
 >req.cookies gives unsigned  cookies only.
 >secretcode can be any string
 > console.log(req.signedCookies)->if we made any changes in singedCookies then it will print {}.
+
+
+#---------------------------------------------------Phase 2(part c)-------------------------------------------#
+<----------What is State?-------------->
+>Session: A single interaction between client and server is called Session.
+
+1: Stateful Protocal: 
+>Stateful protocol wo protocol hai jo previous interactions (state) ko yaad rakhta hai.
+Isme server ko client ke bare me purani information yaad hoti hai, jaise login status, session details, etc.
+🔸Example: FTP (File Transfer Protocol), HTTP with Cookies/Session, Telnet
+
+2: Stateless Protocal:
+>Stateless protocol me server kisi bhi previous request ko yaad nahi rakhta. Har request independent hoti hai.
+🔸 Example: HTTP (by default), UDP
+
+
+#Table:-
+| Feature              | Stateful Protocol              | Stateless Protocol  |
+| -------------------- | ------------------------------ | ------------------- |
+| State maintain hoti? | Haan                           | Nahi                |
+| Speed                | Thoda slow (zyada processing)  | Fast                |
+| Memory use           | Zyada                          | Kam                 |
+| Examples             | FTP, Telnet, HTTP with session | HTTP (default), UDP |
+
+
+<----------------Express Sessions----------------->
+An attempt to make our session stateful.
+>it is an npm package (npm i express-session)
+flow:-
+client data -> save on server -> seession id save in cookie -> get session id from cookie.
+
+ex: when  a user goes on amazon website then site makes a seesion id of the user's selected item,  
+   and saves this seesion id on the user's web browser in the cookie, and amazon website can get again this seession id
+   from the cookie to get the data of the user. 
+
+>we store the user data in temporary storage(server side session storage,Memory Store but it is not recommended for production level)at amazon site(withour user login).
+>Right now we are learing development, so we wiil only use Memory Store.
+>For server side we use compatible session stores.
+>Compatible session stores are usually NOT temporary.
+>Compatible session stores provide persistent storage for session data — unlike 
+ the default in-memory store — and are used to ensure data consistency and scalability in real-world app
+
+
+
+#using npm package:
+app.use(
+    session({
+        secret: "mysecretcodestring",
+        resave: false,
+        saveUninitialized: true
+    })
+);
+
+note: 
+1: "express-session" is an external Node.js module that provides middleware
+    for managing sessions in an Express.js application.
+2: cookie session connection id remains same in different pages/tabs but not for different browsers.
+
+
+#Storing and Using Info:-
+Tracking the session information.
+
+
+<------------------------connect-flash----------------->
+The flash is a special area of the session used for storing messages.
+Messages are written to the flash and cleared after being displayed to the user.
+
+>npm i connect-flash (it is an npm package)
+>connect-flash comes temporarly once in the memory.
+>You should place app.use(flash()) right after your session middleware:
+>syntax:
+req.flash('key', 'message');
+
+
+
+#res.local
+app.use((req,res,next)=>{
+  res.locals.messages = req.flash("success");
+  next();
+});
+
+
+<------------Using Sessions in project----------->
+
+const sessionOptions = {
+    secret: "mysupersecretcode",
+    resave: false,
+    saveUninitialized: true
+}
+app.use(session(sessionOptions));
+
+#Adding Cookie Options.
+const sessionOptions = {
+    secret: "mysupersecretcode",
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+        expires: Date.now() + 1000*60*60*24*3,
+        maxAge: 1000*60*60*24*3,
+        httpOnly: true
+    }
+}
+
+<------------Using Flash in Project----------->
+app.use(session(sessionOptions));
+app.use(flash());
+
+app.use((req, res, next) => {
+    res.locals.success = req.flash("success");
+    next();
+});
+
+#Success Partial:-
+In this i have added alert when operation performed like adding new listing,deleting listing, 
+edit listing, adding and deleting reviews.
+
+#Error Partial:-
+It will show an alert if user want's to accesss deleted listing.(by using the id of deleted listing).
