@@ -361,3 +361,85 @@ edit listing, adding and deleting reviews.
 
 #Error Partial:-
 It will show an alert if user want's to accesss deleted listing.(by using the id of deleted listing).
+
+
+
+<-----------------------------------------------------------Phase 2(part d)-------------------------------------------------------->
+#Authentication:-
+>Authentication is the process of verifying who someone is.
+
+#Authorization:-
+>Authorization is the process of verifying what specific applications, files, and data a user has access to.
+
+#Storing Passwords:-
+>We never store the password as it is, we store their hashed form.
+
+Password --> Hashing function ---> Hashed String
+ex: "hello" --> Hashing function ---> "ad3034df030"
+
+#Hashing:-
+What we need to know ?
+
+1: For every input, there is a fixed output.
+2: They are one way functions, we can't get input from output.
+3: For different input, there is a different output but of same length.
+4: Small changes in input should bring large changes in output.
+
+>Some Hashing functions:-
+1: SHA256
+2: MD5
+3: CRC 
+4: Becrypt
+
+#Salting:-
+Password Salting is a technique to protect passwords stored in databases by addding a string of 32 or
+more characters and then hashing them.
+
+ex: vaibhav@53 + %?@ = vaibhav@53%?@(salted string) ---> Hashing function ---> Hashed String.
+
+#Passport:-
+>Passport is Express-compatible authentication middleware for Node.js.
+>Passport is a nodejs tool to perform salting, hashing and Authentication.
+> go on https://www.passportjs.org/ 
+1: npm i passport (passport as a library will be installed)
+2: npm i passport-local (Passport strategy for authenticating with a username and password.)
+3: npm i passport-local-mongoose (Passport-Local Mongoose is a Mongoose plugin that simplifies building username and password login with Passport)
+
+#User Model:-
+>user: username,password,email
+>you are free to define your user how you like. Passport local-mongoose will add a username,hash and salt 
+ field to store the username, the hashed password and the salt value.
+
+ Additionally, Passport-Local Mongoose adds some methods to your Schema. See the API
+
+
+#Configuring strategy:-
+>passport.initialize()
+A middleware that initializes passport.
+
+>passport.seesion()
+A web application needs the ability to identify users as they browse from page to page.
+The series of requests and responses, each associated with the same user, is known as a session.
+
+>passport.use(new LocalStrategy(User.authenticate()))
+
+
+#Demo User:-
+app.use("/demo", async (req, res) => {
+    const fakeUser = new User({
+        email: "student@gmail.com",
+        username: "shukla ji"
+    });
+    let registeredUser = await User.register(fakeUser, "hellobhai");
+    res.send(registeredUser);
+});
+
+#Signup User:-
+GET /signup
+POST /signup
+
+#Login User:-
+GET /login
+POST /login
+
+Home Work: Read passport documentation
