@@ -443,3 +443,76 @@ GET /login
 POST /login
 
 Home Work: Read passport documentation
+
+
+
+<-----------------------------------------------------------Phase 2(part e)-------------------------------------------------------->
+#Connecting Login Route:-
+How to check if user is logged in?
+
+req.isAuthenticated() //Passport method
+
+
+#Logout User:-
+GET /logout
+
+//logout route
+router.get("/logout", (req, res, next) => {
+    req.logout((err) => {
+        if (err) {
+            return next(err);
+        }
+        req.flash("success", "you are logged out now!");
+        res.redirect("/listings");
+    });
+});
+
+
+#Add Styling:-
+added sign up, login, logout functionaliteis in navbar.ejs(bootrap styling is applied)
+
+
+#Login after SignUp:-
+Passport's login method automatically establishes a login sesssion.
+We can invoke login to automatically login a user.
+>Aim: no need to login after signup.
+
+req.login(registeredUser, (err) => {
+ if (err) {
+       return next(err);
+   }
+  req.flash("success", "Welcome to Wanderlust");
+  res.redirect("/listings");
+});
+
+
+#post-login Page:-
+note: passport doesn't have the access to delete res.locals variables.
+
+
+#Listing Owner:-
+>Added owner(reference taken from User collection) field in listing(in models/listing.js)
+>we will add the req.user._id in listing.owner and we will use populate to spread all the field of owner.
+> req.user is a fixed property name provided by Passport, not related to the name of your model.
+Listing Authorization: Listing will be deleted and edited by it's owner only.
+Review Authorization: Review will be deleted by it's owner only.
+
+
+#Starting with Authorization:-
+=>For Listings:
+1: Hiding Delete and Edit button for the users which are not the owners of it.
+> we will match listing owner to the user who wants to delete or edit.
+> Also did server side validation so that no user can edit or delete by sending an api request.(using hopscotch or etc)
+
+2: In update route:
+  if (!listing.owner.equals(res.locals.currUser._id)) {
+      req.flash("error", "You don't have permission to edit");
+      return res.redirect(`/listings/${id}`);
+ }
+
+=>For Reviews:-
+>Provided isLoggedIn middleware to router.post and router.delete in review.js so that only logged in users can 
+add or delete reviews.
+>Aslo added author field in models/review.js for making the author of every review.
+>Added the name of author of each review in UI.
+>Review will be deleted by it's author only.
