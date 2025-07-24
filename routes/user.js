@@ -50,7 +50,8 @@ router.post(
     }),
     async (req, res) => {
         req.flash("success", "Welcome back to Wanderlust!");
-        let redirectUrl = res.locals.redirectUrl || "/listings";
+        let redirectUrl = req.session.redirectUrl || "/listings";
+        delete req.session.redirectUrl;
         res.redirect(redirectUrl);
     }
 );

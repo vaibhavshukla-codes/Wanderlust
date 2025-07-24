@@ -7,7 +7,7 @@ module.exports.isLoggedIn = (req, res, next) => {
   //console.log(req); req.user is set by Passport.js after login and contains the authenticated user's data from the database.
   if (!req.isAuthenticated()) {
     req.session.redirectUrl = req.originalUrl;
-    req.flash("error", "you must be logged in to create listing!");
+    req.flash("error", req.flashMessage || "you must be logged in to create listing!");
     return res.redirect("/login");
   }
   next();

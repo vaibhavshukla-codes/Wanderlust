@@ -26,6 +26,10 @@ router.post(
 //Delete Review Route
 router.delete(
     "/:reviewId",
+    (req, res, next) => {
+        req.flashMessage = "You must be logged in to delete a review!"; // Custom flash message
+        next();
+    },
     isLoggedIn,
     isReviewAuthor,
   wrapAsync(async (req, res) => {
