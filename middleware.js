@@ -2,9 +2,11 @@ const Listing = require("./models/listing");
 const ExpressError = require("./utils/ExpressError.js");
 const { listingSchema, reviewSchema } = require("./schema.js");
 const Review = require("./models/review.js");
+
 //req.isAuthenticated(), It returns true if the user is logged in, otherwise false.
+//console.log(req); req.user is set by Passport.js after login and contains the authenticated user's data from the database.
+
 module.exports.isLoggedIn = (req, res, next) => {
-  //console.log(req); req.user is set by Passport.js after login and contains the authenticated user's data from the database.
   if (!req.isAuthenticated()) {
     req.session.redirectUrl = req.originalUrl;
     req.flash("error", req.flashMessage || "you must be logged in to create listing!");

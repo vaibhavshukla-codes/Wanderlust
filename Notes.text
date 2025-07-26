@@ -1,7 +1,7 @@
 Note: Methods used in WanderLust:-
-
 1: toLocaleString()
-
+#mention in resume:-
+We have Implemented a fullstack project using MVC FrameWork.
 -------------------------------------------------------------------------------------------------------------------------
 #------------------------------Phase 1(part a)----------------------#
 #Getting Started:-
@@ -516,3 +516,71 @@ add or delete reviews.
 >Aslo added author field in models/review.js for making the author of every review.
 >Added the name of author of each review in UI.
 >Review will be deleted by it's author only.
+
+
+<-----------------------------------------------------------Phase 3(part a)-------------------------------------------------------->
+<------------------MVC FrameWork(mention in resume)------------------------------>
+Ex: We have Implemented a fullstack project using MVC FrameWork.
+#MVC: Model    View      Controller
+      Datbase  Frontend  Backend
+
+>Implement Design Pattern for Listings.
+
+>Implement Design Pattern for Reviews and Users.
+->moving callbacks to Controllers folder.
+
+
+
+<----------Router.route--------->
+A way to group together routes with different verbs but same paths.
+
+<----------Re-style Ratings--------->
+Used Rating library : starability from https://github.com/LunarLogic/starability
+
+
+
+<----------------------------------Image Upload----------------------------------->
+We can't uplaod images due to:-
+1:send files
+2:size limit
+still we will overcome it.
+
+>Flow:
+form will capable of sending files-->
+we will use thirdy party serivce to save images and take the link  of those images-->
+we will save the link of images in our database(mongodb).
+
+
+<----Manipulating form------>
+enctype = "multipart/form-data"
+
+<div class="mb-3">
+  <label for="image" class="form-label">Upload Listing Image</label>
+  <input name="listing[image]" type="file"  class="form-control">
+</div>
+
+#Multer:-
+Multer is a node.js middleware for handling multipart/form-data, which is primarily used for uploading files. It is written on top of busboy for maximum efficiency.
+NOTE: Multer will not process any form which is not multipart (multipart/form-data)
+
+#Cloud Setup:-
+Cloudinary and .env file.
+>we use dotenv library from npm to access .env file.
+
+>Store files:
+Multer Store Cloudinary
+
+npm i Cloudinary multer-storage-cloudinary
+>we are saving our data(images) on cloudinary.
+
+>Save link in Mongo:-
+Modify image in schema.
+
+#Edit Listing Image:-
+>Edit Form
+>Image Preview for Edit Page
+
+
+
+<-----------Getting started with Maps------------->
+We will use MapBox.
