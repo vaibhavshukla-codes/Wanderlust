@@ -2,6 +2,8 @@ Note: Methods used in WanderLust:-
 1: toLocaleString()
 #mention in resume:-
 We have Implemented a fullstack project using MVC FrameWork.
+We have used Maps.(google maps api)(Haven't did)
+We used Bootrap for styling 
 -------------------------------------------------------------------------------------------------------------------------
 #------------------------------Phase 1(part a)----------------------#
 #Getting Started:-
@@ -576,11 +578,39 @@ npm i Cloudinary multer-storage-cloudinary
 >Save link in Mongo:-
 Modify image in schema.
 
+
+<-----------------------------------------------------------Phase 3(part b)-------------------------------------------------------->
 #Edit Listing Image:-
 >Edit Form
 >Image Preview for Edit Page
 
+#Getting started with Maps:-
+>We will use MapBox.
+
+#Image Preview:-
+
+#Maps:-
+
+#First Map:-
+
+#Geocoding:-
+
+#Storig Co-ordinates:-
+
+#Map Marker:-
+
+#Map Popup:-
 
 
-<-----------Getting started with Maps------------->
-We will use MapBox.
+<-----------------------------------------------------------Phase 3(part c)-------------------------------------------------------->
+#Fixing Home Page:-
+
+#Add UI for Filters:-
+>Adding Filters
+
+#Add UI for Tax Switch:-
+
+
+#Making Tax Switch Functional:-
+
+#Add UI for Search:-
