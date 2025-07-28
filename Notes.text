@@ -5,6 +5,8 @@ We have Implemented a fullstack project using MVC FrameWork.
 We have used Maps.(google maps api)(Haven't did)
 We used Bootrap for styling 
 We have used cloudinary to store new listings(images).
+#To Work:
+Add media queries for responsiveness.
 -------------------------------------------------------------------------------------------------------------------------
 #------------------------------Phase 1(part a)----------------------#
 #Getting Started:-
